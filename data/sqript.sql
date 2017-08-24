@@ -36,3 +36,16 @@ create table users(
 );
 
 create unique index users_login_uindex on users (login);
+
+create table user_roles(
+	id uuid not null
+		constraint user_roles_pkey
+			primary key,
+	users_id uuid not null,
+	role_id integer not null
+);
+
+create unique index user_roles_id_uindex on user_roles (id);
+
+create unique index user_roles_users_id_uindex on user_roles (users_id);
+
