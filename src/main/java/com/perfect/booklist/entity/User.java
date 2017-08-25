@@ -1,10 +1,8 @@
 package com.perfect.booklist.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -12,16 +10,16 @@ import java.util.UUID;
  */
 @Entity
 @Table(name="users")
-public class User  {
+public class User extends IdEntity {
 
-    @Id
-    @Column
-    private UUID id;
     @Column
     private String login;
     @Column
     private String password;
     @Column
     private String email;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Bookmark> bookmarks;
 
 }

@@ -14,6 +14,7 @@ create table bookmarks(
 		constraint bookmarks_pkey
 			primary key,
 	user_id uuid,
+	book_id uuid,
 	date_create bigint not null,
 	date_delete bigint
 );
