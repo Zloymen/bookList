@@ -50,3 +50,15 @@ create unique index user_roles_id_uindex on user_roles (id);
 
 create unique index user_roles_users_id_uindex on user_roles (users_id);
 
+create table active_session (
+	series_id text NOT NULL constraint active_session_pkey
+			primary key,
+    user_id uuid NOT NULL,
+
+    token text NOT NULL,
+    last_used BIGINT NOT NULL
+);
+
+create unique index active_session_series_id_uindex on active_session (series_id);
+
+create unique index active_session_users_id_uindex on active_session (user_id);

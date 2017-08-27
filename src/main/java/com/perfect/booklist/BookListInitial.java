@@ -1,5 +1,7 @@
 package com.perfect.booklist;
 
+import org.springframework.context.annotation.Import;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -7,6 +9,7 @@ import javax.servlet.Filter;
 /**
  * Created by Zloy on 16.08.2017.
  */
+
 public class BookListInitial extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
@@ -25,6 +28,6 @@ public class BookListInitial extends AbstractAnnotationConfigDispatcherServletIn
 
     @Override
     protected Filter[] getServletFilters() {
-        return new Filter []  {  };
+        return new Filter []  { new DelegatingFilterProxy("springSecurityFilterChain")};
     }
 }

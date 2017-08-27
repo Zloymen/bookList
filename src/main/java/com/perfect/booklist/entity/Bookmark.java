@@ -23,4 +23,36 @@ public class Bookmark extends IdEntity {
 
     @Column(name = "date_delete")
     private Long dateDelete;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Long getDateCreate() {
+        return dateCreate;
+    }
+
+    public void setDateCreate(Long dateCreate) {
+        this.dateCreate = dateCreate;
+    }
+
+    public Long getDateDelete() {
+        return dateDelete;
+    }
+
+    public void setDateDelete(Long dateDelete) {
+        this.dateDelete = dateDelete;
+    }
 }

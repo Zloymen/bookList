@@ -20,6 +20,19 @@ public class RoleUser extends IdEntity{
     @Convert(converter = Roles.RolesConverter.class)
     private Roles role;
 
+    public UUID getUsersId() {
+        return usersId;
+    }
 
+    public void setUsersId(UUID usersId) {
+        this.usersId = usersId;
+    }
 
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
 }
