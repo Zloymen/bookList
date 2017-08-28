@@ -1,7 +1,8 @@
-package com.perfect.booklist.service;
+package com.perfect.booklist.service.impl;
 
 import com.perfect.booklist.dao.IBookDao;
 import com.perfect.booklist.entity.Book;
+import com.perfect.booklist.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class BookServiceImp implements IBookService{
+public class BookServiceImp implements IBookService {
 
     @Autowired
     private IBookDao bookDao;

@@ -30,6 +30,7 @@ public class BookListDBConfig{
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
+        sessionFactory.setPackagesToScan("com.perfect.booklist.entity");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }

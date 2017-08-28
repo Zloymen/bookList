@@ -1,3 +1,14 @@
+$.ajax({data:{  login: 'zloy',  password: 'abc125'},
+            type: 'POST',
+            url: '/login'
+
+        }).done(function(data, textStatus, jqXHR) {
+            console.log(data, textStatus);
+
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            alert('Booh! Wrong credentials, try again!');
+        });
+
 create table book_list(
 	id uuid not null
 		constraint book_list_pkey

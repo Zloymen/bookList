@@ -19,8 +19,8 @@ public class User extends IdEntity {
     @Column
     private String email;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Bookmark> bookmarks;
+/*    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Bookmark> bookmarks;*/
 
     public String getLogin() {
         return login;
@@ -46,11 +46,11 @@ public class User extends IdEntity {
         this.email = email;
     }
 
-    public List<Bookmark> getBookmarks() {
+/*    public List<Bookmark> getBookmarks() {
         return bookmarks;
     }
 
     public void setBookmarks(List<Bookmark> bookmarks) {
         this.bookmarks = bookmarks;
-    }
+    }*/
 }
