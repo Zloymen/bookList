@@ -40,8 +40,8 @@ public abstract class BaseDaoImp <T> {
     }
 
 
-    public Serializable merge(final T entity) {
-        return (Serializable) sessionFactory.getCurrentSession().merge(entity);
+    public T merge(final T entity) {
+        return (T) sessionFactory.getCurrentSession().merge(entity);
     }
 
     public void delete(final T entity) {
@@ -63,6 +63,10 @@ public abstract class BaseDaoImp <T> {
 
     public T fetchById(Serializable id) {
         return sessionFactory.getCurrentSession().get(entityClass, id);
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 }
 

@@ -1,5 +1,8 @@
 package com.perfect.booklist.service;
 
+import com.perfect.booklist.dao.ISessionDao;
+import com.perfect.booklist.entity.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.stereotype.Repository;
@@ -13,9 +16,18 @@ import java.util.Date;
 @Repository("tokenRepositoryDao")
 @Transactional
 public class TokenServiceImp implements PersistentTokenRepository {
-    @Override
-    public void createNewToken(PersistentRememberMeToken persistentRememberMeToken) {
 
+    @Autowired
+    private ISessionDao sessionDao;
+
+    @Override
+    public void createNewToken(PersistentRememberMeToken token) {
+        Session newSession = new Session();
+/*        persistentLogin.setUsername(token.getUsername());
+        newSession.setSeries(token.getSeries());
+        newSession.setToken(token.getTokenValue());
+        newSession.setLast_used(token.getDate());*/
+        sessionDao.save(newSession);
     }
 
     @Override
