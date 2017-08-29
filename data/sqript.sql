@@ -1,4 +1,4 @@
-$.ajax({data:{  login: 'zloy',  password: 'abc125'},
+$.ajax({data:{  login: 'zloy',  password: 'abc123'},
             type: 'POST',
             url: '/login'
 
