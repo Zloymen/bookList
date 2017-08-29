@@ -10,6 +10,6 @@ public class TestApp {
 
     public static void main(String[] args) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        System.out.println(passwordEncoder.encode("abc125"));
+        System.out.println(passwordEncoder.encode("abc123"));
     }
 }

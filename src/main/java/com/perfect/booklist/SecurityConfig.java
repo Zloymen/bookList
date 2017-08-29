@@ -1,5 +1,8 @@
 package com.perfect.booklist;
 
+import com.perfect.booklist.handler.RESTAuthenticationEntryPoint;
+import com.perfect.booklist.handler.RESTAuthenticationFailureHandler;
+import com.perfect.booklist.handler.RESTAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,16 +38,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private PersistentTokenRepository tokenRepository;
 
     @Autowired
+    private RESTAuthenticationEntryPoint authenticationEntryPoint;
+    @Autowired
+    private RESTAuthenticationFailureHandler authenticationFailureHandler;
+    @Autowired
+    private RESTAuthenticationSuccessHandler authenticationSuccessHandler;
+
+    @Autowired
     public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(new ShaPasswordEncoder());
+        auth.userDetailsService(userDetailsService);
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().formLogin().usernameParameter("login").and().authorizeRequests()
+        http.csrf().disable().formLogin().usernameParameter("login").failureHandler(authenticationFailureHandler).successHandler(authenticationSuccessHandler).and().authorizeRequests()
                 .antMatchers("/resources/**", "/login", "/about").permitAll()
                 .antMatchers("/authorize/**").authenticated().and()
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
                 .rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)
                 .tokenValiditySeconds(86400);
     }
