@@ -17,6 +17,8 @@ public class Book extends IdEntity{
     private String author;
     @Column
     private Integer year;
+    @Column(name = "file_id")
+    private Integer fileId;
 
     public String getName() {
         return name;
@@ -40,5 +42,13 @@ public class Book extends IdEntity{
 
     public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public Integer getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(Integer fileId) {
+        this.fileId = fileId;
     }
 }
