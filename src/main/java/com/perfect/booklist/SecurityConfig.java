@@ -52,8 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //todo тут должна быть реализация сессионного хранилища для кластеризации (interface SessionRegistry) если не устраивает redis
+        //http.sessionManagement().maximumSessions(1).sessionRegistry().maxSessionsPreventsLogin(false);
         http.csrf().disable().formLogin().usernameParameter("login").failureHandler(authenticationFailureHandler).successHandler(authenticationSuccessHandler).and().authorizeRequests()
-                .antMatchers("/resources/**", "/login", "/about").permitAll()
+                .antMatchers("/**").permitAll() //"/resources/**", "/login", "/about",
                 .antMatchers("/authorize/**").authenticated().and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
                 .rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)

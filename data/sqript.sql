@@ -6,8 +6,10 @@ $.ajax({data:{  login: 'zloy',  password: 'abc123'},
             console.log(data, textStatus);
 
         }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.log('Booh! Wrong credentials, try again!');
+            console.log(data, textStatus);
         });
+
+
 
 create table book_list(
 	id uuid not null
