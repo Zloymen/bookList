@@ -7,13 +7,29 @@ Ext.define('BookList.view.login.LoginController', {
     alias: 'controller.login',
 
     onLoginClick: function () {
-        // Set the localStorage value to true
-        localStorage.setItem("TutorialLoggedIn", true);
 
-        // Remove Login Window
-        this.getView().destroy();
+        console.log(this);
 
-        // Add the main view to the viewport
-        Ext.widget('app-main');
+        Ext.Ajax.request({
+            url: 'login',
+            method: 'POST',
+            extraParams: this,
+            jsonData: Ext.encode(request),
+            success: function (response, opts) {
+
+                // Set the localStorage value to true
+                localStorage.setItem("TutorialLoggedIn", true);
+
+                // Remove Login Window
+                opts.extraParams.getView().destroy();
+
+                // Add the main view to the viewport
+                Ext.widget('app-main');
+            },
+            failure: function (response, opts) {
+                console.log('ошибка');
+            }
+        });
+
     }
 });
