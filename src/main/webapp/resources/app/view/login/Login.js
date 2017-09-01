@@ -20,19 +20,19 @@ Ext.define("BookList.view.login.Login", {
         xtype: 'form',
         reference: 'form',
         items: [{
-            xtype: 'textfield',
-            name: 'username',
-            fieldLabel: 'Пользователь',
-            allowBlank: false
-        }, {
-            xtype: 'textfield',
-            name: 'password',
-            inputType: 'password',
-            fieldLabel: 'Пароль',
-            allowBlank: false
-        }, {xtype: 'label',
-            html: 'Нету учетной записи? <a href="#" onClick="javascript:appName.app.getController(\'myController\').showRegistration();">Регистрация</a>'
-        }
+                xtype: 'textfield',
+                reference: 'username',
+                name: 'username',
+                fieldLabel: 'Пользователь',
+                allowBlank: false
+            }, {
+                xtype: 'textfield',
+                name: 'password',
+                reference: 'password',
+                inputType: 'password',
+                fieldLabel: 'Пароль',
+                allowBlank: false
+            }
         ],
         buttons: [{
             text: 'Войти',
@@ -41,9 +41,9 @@ Ext.define("BookList.view.login.Login", {
                 click: 'onLoginClick'
             }
         }, {
-            text: 'Отмена',
+            text: 'Регистрация',
             listeners: {
-                click: 'onCancel'
+                click: 'onRegistationClick'
             }
         }]
     }

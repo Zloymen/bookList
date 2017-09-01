@@ -20,7 +20,8 @@ Ext.define('BookList.Application', {
     ],
 
     views: [
-        'BookList.view.login.Login'
+        'BookList.view.login.Login',
+        'BookList.view.registration.Registration'
     ],
 
     launch: function () {

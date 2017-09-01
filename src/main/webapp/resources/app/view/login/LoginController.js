@@ -8,7 +8,10 @@ Ext.define('BookList.view.login.LoginController', {
 
     onLoginClick: function () {
 
-        console.log(this);
+        var login = this.lookupReference('username'),
+            password = this.lookupReference('password');
+
+        var request = {login: login.getValue(), password: password.getValue()};
 
         Ext.Ajax.request({
             url: 'login',
@@ -31,5 +34,9 @@ Ext.define('BookList.view.login.LoginController', {
             }
         });
 
+    },
+    onRegistationClick: function () {
+        this.getView().destroy();
+        Ext.widget('registration');
     }
 });
