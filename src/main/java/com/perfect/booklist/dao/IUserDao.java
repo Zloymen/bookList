@@ -8,4 +8,5 @@ import com.perfect.booklist.entity.User;
 public interface IUserDao {
 
     User getByLogin(String login);
+    User save(User user);
 }

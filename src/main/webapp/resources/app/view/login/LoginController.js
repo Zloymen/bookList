@@ -17,11 +17,11 @@ Ext.define('BookList.view.login.LoginController', {
             url: 'login',
             method: 'POST',
             extraParams: this,
-            jsonData: Ext.encode(request),
+            params: request,
             success: function (response, opts) {
 
                 // Set the localStorage value to true
-                localStorage.setItem("TutorialLoggedIn", true);
+                localStorage.setItem("loggedIn", true);
 
                 // Remove Login Window
                 opts.extraParams.getView().destroy();

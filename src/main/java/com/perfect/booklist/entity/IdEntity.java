@@ -1,8 +1,8 @@
 package com.perfect.booklist.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.util.UUID;
 
 /**
@@ -12,7 +12,8 @@ import java.util.UUID;
 @MappedSuperclass
 public class IdEntity {
     @Id
-    @Column
+    @Column(name = "id", updatable = false, nullable = false)
+    @Type(type = "org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
     public UUID getId() {
@@ -22,4 +23,15 @@ public class IdEntity {
     public void setId(UUID id) {
         this.id = id;
     }
+
+    @PrePersist
+    void preInsert(){
+        if(id == null) id = UUID.randomUUID();
+    }
+
+    @PreUpdate
+    void preUpdate(){
+        if(id == null) id = UUID.randomUUID();
+    }
+
 }

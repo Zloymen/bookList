@@ -5,104 +5,6 @@
  *
  * TODO - Replace this content of this view to suite the needs of your application.
  */
-/*Ext.define('BookList.view.main.Main', {
-    extend: 'Ext.tab.Panel',
-    xtype: 'app-main',
-
-    requires: [
-        'Ext.plugin.Viewport',
-        'Ext.window.MessageBox',
-
-        'BookList.view.main.MainController',
-        'BookList.view.main.MainModel',
-        'BookList.view.main.List'
-
-    ],
-
-    controller: 'main',
-    viewModel: 'main',
-
-    ui: 'navigation',
-
-    tabBarHeaderPosition: 1,
-    titleRotation: 0,
-    tabRotation: 0,
-
-    header: {
-        layout: {
-            align: 'stretchmax'
-        },
-        title: {
-            bind: {
-                text: '{name}'
-            },
-            flex: 0
-        },
-        iconCls: 'fa-th-list'
-    },
-
-    tabBar: {
-        flex: 1,
-        layout: {
-            align: 'stretch',
-            overflowHandler: 'none'
-        }
-    },
-
-    responsiveConfig: {
-        tall: {
-            headerPosition: 'top'
-        },
-        wide: {
-            headerPosition: 'left'
-        }
-    },
-
-    defaults: {
-        bodyPadding: 20,
-        tabConfig: {
-            plugins: 'responsive',
-            responsiveConfig: {
-                wide: {
-                    iconAlign: 'left',
-                    textAlign: 'left'
-                },
-                tall: {
-                    iconAlign: 'top',
-                    textAlign: 'center',
-                    width: 120
-                }
-            }
-        }
-    },
-
-    items: [{
-        title: 'Home',
-        iconCls: 'fa-home',
-        // The following grid shares a store with the classic version's grid as well!
-        items: [{
-            xtype: 'mainlist'
-        }]
-    }, {
-        title: 'Users',
-        iconCls: 'fa-user',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Groups',
-        iconCls: 'fa-users',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Settings',
-        iconCls: 'fa-cog',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }]
-});*/
 
 Ext.define('BookList.view.main.Main', {
     extend: 'Ext.container.Container',
@@ -114,14 +16,15 @@ Ext.define('BookList.view.main.Main', {
 
     xtype: 'app-main',
 
+    layout: 'border',
+
     controller: 'main',
     viewModel: {
         type: 'main'
     },
 
-    layout: {
-        type: 'border'
-    },
+
+/*    items: [{xtype: 'mainPanel'}]*/
 
     items: [{
         xtype: 'panel',
@@ -129,20 +32,61 @@ Ext.define('BookList.view.main.Main', {
             title: '{name}'
         },
         region: 'west',
-        html: '<ul><li>This area is commonly used for navigation, for example, using a "tree" component.</li></ul>',
+        //html: '<ul><li>This area is commonly used for navigation, for example, using a "tree" component.</li></ul>',
         width: 250,
         split: true,
-        tbar: [{
-            text: 'Button',
-            handler: 'onClickButton'
+        items:[{
+            xtype: 'button',
+            text: 'Книги',
+            style: {
+                width: '100%',
+                marginBottom: '5px',
+                marginTop: '5px'
+            },
+            handler: 'onMainPanelClick'
+        },{
+            xtype: 'button',
+            text: 'Закладки',
+            style: {
+                width: '100%',
+                marginBottom: '5px',
+                marginTop: '5px'
+            },
+            handler: 'onBookmarksClick'
+        },{
+            xtype: 'button',
+            text: 'Настройки',
+            style: {
+                width: '100%',
+                marginBottom: '5px',
+                marginTop: '5px'
+            },
+            handler: 'onSettingClick'
+        },{
+            xtype: 'button',
+            text: 'О программе',
+            style: {
+                width: '100%',
+                marginBottom: '5px',
+                marginTop: '5px'
+            },
+            handler: 'onAboutClick'
+        }, {
+            xtype: 'button',
+            text: 'Выход',
+            style: {
+                width: '100%',
+                marginBottom: '5px',
+                marginTop: '5px'
+            },
+            handler: 'onLogoutButton'
         }]
     }, {
         region: 'center',
-        xtype: 'tabpanel',
-        items: [{
-            title: 'Tab 1',
-            html: '<h2>Content appropriate for the current navigation.</h2>'
-        }]
+        xtype: 'panel',
+        scrollable:'y',
+        reference: 'mainPanel'/*,
+        items: [{xtype: 'grid', title: 'Книги'}]*/
     }]
 });
 

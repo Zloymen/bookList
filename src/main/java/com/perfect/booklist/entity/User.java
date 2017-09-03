@@ -1,6 +1,8 @@
 package com.perfect.booklist.entity;
 
 
+import com.perfect.booklist.dto.UserDto;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
@@ -46,7 +48,24 @@ public class User extends IdEntity {
         this.email = email;
     }
 
-/*    public List<Bookmark> getBookmarks() {
+    public User(String login, String password, String email) {
+        if(this.getId() == null) this.setId(UUID.randomUUID());
+        this.login = login;
+        this.password = password;
+        this.email = email;
+    }
+
+    public User() {
+    }
+
+    public User(UserDto userDto) {
+        if(this.getId() == null) this.setId(UUID.randomUUID());
+        this.login = userDto.getLogin();
+        this.password = userDto.getPassword();
+        this.email = userDto.getEmail();
+    }
+
+    /*    public List<Bookmark> getBookmarks() {
         return bookmarks;
     }
 

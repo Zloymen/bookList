@@ -7,6 +7,10 @@
 Ext.define('BookList.view.main.MainController', {
     extend: 'Ext.app.ViewController',
 
+    requires: [
+        'BookList.component.bookgrid.BookGrid'
+    ],
+
     alias: 'controller.main',
 
     onItemSelected: function (sender, record) {
@@ -19,14 +23,56 @@ Ext.define('BookList.view.main.MainController', {
         }
     },
 
-    onClickButton: function () {
-        // Remove the localStorage key/value
-        localStorage.removeItem('TutorialLoggedIn');
+    onLogoutButton: function () {
 
-        // Remove Main View
-        this.getView().destroy();
 
-        // Add the Login Window
-        Ext.widget('login');
+        Ext.Ajax.request({
+            url: 'logout',
+            method: 'POST',
+            extraParams: this,
+            success: function (response, opts) {
+
+                // Remove the localStorage key/value
+                localStorage.removeItem('loggedIn');
+
+                // Remove Main View
+                opts.extraParams.getView().destroy();
+
+                // Add the Login Window
+                Ext.widget('login');
+            },
+            failure: function (response, opts) {
+                console.log('ошибка');
+            }
+        });
+
+    },
+
+    onMainPanelClick: function(){
+        var mainPanel = this.lookupReference('mainPanel');
+        mainPanel.removeAll();
+        var grid = Ext.create('BookList.component.bookgrid.BookGrid',{});
+        mainPanel.add(grid);
+    },
+
+    onAboutClick: function(){
+        var mainPanel = this.lookupReference('mainPanel');
+        mainPanel.removeAll();
+        var grid = Ext.create('Ext.panel.Panel',{title: 'О программе', layout: 'fit'});
+        mainPanel.add(grid);
+    },
+
+    onBookmarksClick: function(){
+        var mainPanel = this.lookupReference('mainPanel');
+        mainPanel.removeAll();
+        var grid = Ext.create('Ext.panel.Panel',{title: 'Закладки', layout: 'fit'});
+        mainPanel.add(grid);
+    },
+
+    onSettingClick: function(){
+        var mainPanel = this.lookupReference('mainPanel');
+        mainPanel.removeAll();
+        var grid = Ext.create('Ext.panel.Panel',{title: 'Настройки', layout: 'fit'});
+        mainPanel.add(grid);
     }
 });

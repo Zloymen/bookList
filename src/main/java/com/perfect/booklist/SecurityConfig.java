@@ -6,6 +6,7 @@ import com.perfect.booklist.handler.RESTAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -19,6 +20,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
@@ -54,9 +56,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //todo тут должна быть реализация сессионного хранилища для кластеризации (interface SessionRegistry) если не устраивает redis
         //http.sessionManagement().maximumSessions(1).sessionRegistry().maxSessionsPreventsLogin(false);
-        http.csrf().disable().formLogin().usernameParameter("login").failureHandler(authenticationFailureHandler).successHandler(authenticationSuccessHandler).and().authorizeRequests()
-                .antMatchers("/**").permitAll() //"/resources/**", "/login", "/about",
-                .antMatchers("/authorize/**").authenticated().and()
+        http.csrf().disable()
+                .formLogin().usernameParameter("login").failureHandler(authenticationFailureHandler).successHandler(authenticationSuccessHandler).and()
+                .logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK)).and()
+                .authorizeRequests().antMatchers("/resources/**", "/login", "/about", "/registration").permitAll()
+                .antMatchers("/authorize/**", "/export/**").authenticated().and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
                 .rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)
                 .tokenValiditySeconds(86400);

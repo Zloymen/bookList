@@ -25,14 +25,15 @@ Ext.define('BookList.Application', {
     ],
 
     launch: function () {
-        var loggedIn;
+        Ext.Ajax.on('requestexception', function(connection,response) {
+            console.log('error exeption', response);
+            if(response.status === 401) {
+                localStorage.removeItem("loggedIn");
+                Ext.widget('login');
+            }
+        });
+        var loggedIn  = localStorage.getItem("loggedIn");
 
-        // Check to see the current value of the localStorage key
-        loggedIn = localStorage.getItem("TutorialLoggedIn");
-
-        // This ternary operator determines the value of the TutorialLoggedIn key.
-        // If TutorialLoggedIn isn't true, we display the login window,
-        // otherwise, we display the main view
         Ext.widget(loggedIn ? 'app-main' : 'login');
     },
 

@@ -12,7 +12,7 @@ Ext.define("BookList.view.login.Login", {
 
     controller: 'login',
     bodyPadding: 10,
-    title: 'Login Window',
+    title: 'Авторизация',
     closable: false,
     autoShow: true,
 

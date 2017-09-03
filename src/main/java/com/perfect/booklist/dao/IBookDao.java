@@ -2,6 +2,7 @@ package com.perfect.booklist.dao;
 
 import com.perfect.booklist.entity.Book;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,4 +10,6 @@ import java.util.List;
  */
 public interface IBookDao {
     List<Book> fetchAll();
+
+    Book fetchById(Serializable id);
 }

@@ -15925,3 +15925,10 @@ a.x-color-picker-item:hover {
 .x-box-scroller-menu-default.x-box-scroller-bottom:before {
     content: "\f078";
 }
+
+.icon-start {
+    background-image: url("/export/star.svg");
+    width: 60px;
+    height: 60px;
+    fill: #ffb600;
+}

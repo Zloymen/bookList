@@ -1,5 +1,6 @@
 package com.perfect.booklist.service;
 
+import com.perfect.booklist.dto.BookMarkDto;
 import com.perfect.booklist.entity.Book;
 
 import java.util.List;
@@ -9,4 +10,7 @@ import java.util.List;
  */
 public interface IBookService {
     List<Book> getAllBook();
+    void saveBookMark(BookMarkDto dto);
+
+
 }

@@ -21,15 +21,15 @@ Ext.define("BookList.view.registration.Registration", {
         reference: 'form',
         items: [{
             xtype: 'textfield',
-            reference: 'username',
-            name: 'username',
+            reference: 'login',
+            name: 'login',
             fieldLabel: 'Пользователь',
             allowBlank: false
         },
         {
             xtype: 'textfield',
-            name: 'mail',
-            reference: 'mail',
+            name: 'email',
+            reference: 'email',
             fieldLabel: 'Емаил',
             allowBlank: false
         },

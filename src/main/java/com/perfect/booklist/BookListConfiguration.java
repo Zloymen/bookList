@@ -1,11 +1,10 @@
 package com.perfect.booklist;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -17,14 +16,20 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.perfect.booklist")
+@PropertySource(value = { "classpath:application.properties" })
 @Import(SecurityConfig.class)
 public class BookListConfiguration extends WebMvcConfigurerAdapter {
+
+    @Autowired
+    private Environment env;
+
+
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/");
-        viewResolver.setSuffix(".html");
+        viewResolver.setSuffix(".jsp");
         registry.viewResolver(viewResolver);
     }
 
@@ -37,6 +42,8 @@ public class BookListConfiguration extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/ext/**").addResourceLocations("/resources/ext/");
         registry.addResourceHandler("/**").addResourceLocations("/resources/");
         registry.addResourceHandler("/classic/**").addResourceLocations("/resources/classic/");
+
+        registry.addResourceHandler("/export/**").addResourceLocations( env.getProperty("file.external"));
     }
 
     @Bean
