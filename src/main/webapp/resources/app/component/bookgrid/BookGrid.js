@@ -5,8 +5,6 @@ Ext.define("BookList.component.bookgrid.BookGrid", {
     extend: 'Ext.grid.Panel',
     xtype: 'bookgrid',
     title: 'Книги',
-    layout: 'fit',
-    scrollable:'y',
 
     requires: [
         'BookList.store.BookStore'
@@ -64,6 +62,7 @@ Ext.define("BookList.component.bookgrid.BookGrid", {
             sortable: false,
             dataIndex: 'fileId',
             renderer: function (value) {
+
               return '<img style="width-max: 200px; max-height: 200px" src="export/' + value + '"/>';
             },
             flex: 3
@@ -77,7 +76,7 @@ Ext.define("BookList.component.bookgrid.BookGrid", {
         this.callParent(arguments);
 
         Ext.Ajax.request({
-            url: '/books',
+            url: '/authorize/books',
             method: 'GET',
             storeImp: self.getStore(),
             success: function (response, opt) {

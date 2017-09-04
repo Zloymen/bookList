@@ -8,7 +8,8 @@ Ext.define('BookList.view.main.MainController', {
     extend: 'Ext.app.ViewController',
 
     requires: [
-        'BookList.component.bookgrid.BookGrid'
+        'BookList.component.bookgrid.BookGrid',
+        'BookList.component.bookmarkgrid.BookMarkGrid'
     ],
 
     alias: 'controller.main',
@@ -58,21 +59,42 @@ Ext.define('BookList.view.main.MainController', {
     onAboutClick: function(){
         var mainPanel = this.lookupReference('mainPanel');
         mainPanel.removeAll();
-        var grid = Ext.create('Ext.panel.Panel',{title: 'О программе', layout: 'fit'});
+        var grid = Ext.create('Ext.panel.Panel',{title: 'О программе', layout: 'fit', items:[
+            {
+                xtype: 'panel',
+                header: false,
+                headerAsText: false,
+                layout: {
+                    type: 'hbox',
+                    align: 'stretch'
+                },
+                items:[{
+                    xtype: 'panel',
+                    layout: 'fit',
+                    flex: 1,
+                    html:'<div>Гирко К.В.</div><div>для Perfekt</div>'
+                    },{
+                        layout: 'fit',
+                        xtype: 'panel',
+                        flex: 2,
+                        html:'<img style="width-max: 500px; max-height: 600px" src="export/IMG_6499.JPG"/>'
+                    }]
+            }
+        ]});
         mainPanel.add(grid);
     },
 
     onBookmarksClick: function(){
         var mainPanel = this.lookupReference('mainPanel');
         mainPanel.removeAll();
-        var grid = Ext.create('Ext.panel.Panel',{title: 'Закладки', layout: 'fit'});
+        var grid = Ext.create('BookList.component.bookmarkgrid.BookMarkGrid',{});
         mainPanel.add(grid);
     },
 
     onSettingClick: function(){
         var mainPanel = this.lookupReference('mainPanel');
         mainPanel.removeAll();
-        var grid = Ext.create('Ext.panel.Panel',{title: 'Настройки', layout: 'fit'});
+        var grid = Ext.create('BookList.view.profile.Profile');
         mainPanel.add(grid);
     }
 });

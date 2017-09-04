@@ -13,11 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static com.perfect.booklist.constant.MessageError.*;
 
@@ -38,7 +37,19 @@ public class BookServiceImp implements IBookService {
 
     @Override
     public List<Book> getAllBook() {
-        return bookDao.fetchAll();
+        List<Book> listBook = bookDao.fetchAll();
+        User currentUser = userService.getCurrentUser();
+        List<Bookmark> listBookmark = bookmarkDao.getMarkByUser(currentUser, false);
+        List<Book> mark = listBookmark.stream().map(Bookmark::getBook).collect(Collectors.toList());
+        listBook.forEach(item -> item.setFavorite(mark.contains(item)));
+
+        return listBook;
+    }
+
+    @Override
+    public List<Bookmark> getUserBookMark() {
+        User currentUser = userService.getCurrentUser();
+        return bookmarkDao.getMarkByUser(currentUser, true);
     }
 
     public void saveBookMark(BookMarkDto dto){
@@ -65,4 +76,5 @@ public class BookServiceImp implements IBookService {
 
         bookmarkDao.save(bookmark);
     }
+
 }

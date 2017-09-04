@@ -34,4 +34,18 @@ public class IdEntity {
         if(id == null) id = UUID.randomUUID();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof IdEntity)) return false;
+
+        IdEntity idEntity = (IdEntity) o;
+
+        return getId().equals(idEntity.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getId() == null ? 0 : getId().hashCode();
+    }
 }

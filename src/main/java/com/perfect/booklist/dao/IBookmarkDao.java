@@ -12,4 +12,6 @@ import java.util.List;
 public interface IBookmarkDao {
     void save(Bookmark bookmark);
     List<Bookmark> getMark(Book book, User user);
+
+    List<Bookmark> getMarkByUser(User user, boolean isDeleted);
 }

@@ -207,4 +207,40 @@
       </plugins>
     <finalName>BookList</finalName>
   </build>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <mongodb.url>5.200.50.26</mongodb.url>
+                <scheduler>false</scheduler>
+                <log4j.file>local</log4j.file>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>config/local</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>azure</id>
+            <properties>
+                <mongodb.url>5.200.50.26</mongodb.url>
+                <scheduler>false</scheduler>
+                <log4j.file>local</log4j.file>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>config/azure</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
 </project>

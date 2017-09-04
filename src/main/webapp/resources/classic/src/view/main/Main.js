@@ -24,7 +24,6 @@ Ext.define('BookList.view.main.Main', {
     },
 
 
-/*    items: [{xtype: 'mainPanel'}]*/
 
     items: [{
         xtype: 'panel',
@@ -32,7 +31,6 @@ Ext.define('BookList.view.main.Main', {
             title: '{name}'
         },
         region: 'west',
-        //html: '<ul><li>This area is commonly used for navigation, for example, using a "tree" component.</li></ul>',
         width: 250,
         split: true,
         items:[{
@@ -55,7 +53,7 @@ Ext.define('BookList.view.main.Main', {
             handler: 'onBookmarksClick'
         },{
             xtype: 'button',
-            text: 'Настройки',
+            text: 'Профиль',
             style: {
                 width: '100%',
                 marginBottom: '5px',
@@ -84,9 +82,8 @@ Ext.define('BookList.view.main.Main', {
     }, {
         region: 'center',
         xtype: 'panel',
-        scrollable:'y',
-        reference: 'mainPanel'/*,
-        items: [{xtype: 'grid', title: 'Книги'}]*/
+        layout: 'fit',
+        reference: 'mainPanel'
     }]
 });
 

@@ -1,10 +1,12 @@
 package com.perfect.booklist.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.perfect.booklist.dto.UserDto;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.UUID;
 
 /**
@@ -16,6 +18,7 @@ public class User extends IdEntity {
 
     @Column
     private String login;
+    @JsonIgnore
     @Column
     private String password;
     @Column

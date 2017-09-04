@@ -29,8 +29,15 @@ Ext.define('BookList.Application', {
             console.log('error exeption', response);
             if(response.status === 401) {
                 localStorage.removeItem("loggedIn");
-                Ext.widget('login');
+                document.location.reload(true);
             }
+            Ext.create('Ext.window.Window', {
+                title: 'Ошибка',
+                height: 200,
+                width: 400,
+                layout: 'fit',
+                html: 'Произошла ошибка! Обратитесь в службу поддержки'
+            }).show();
         });
         var loggedIn  = localStorage.getItem("loggedIn");
 

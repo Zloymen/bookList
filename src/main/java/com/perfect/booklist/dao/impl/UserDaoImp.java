@@ -3,8 +3,6 @@ package com.perfect.booklist.dao.impl;
 import com.perfect.booklist.dao.IUserDao;
 import com.perfect.booklist.entity.User;
 import org.hibernate.NonUniqueResultException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;

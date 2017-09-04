@@ -24,4 +24,14 @@ public class BookmarkDaoImpl extends BaseDaoImp<Bookmark> implements IBookmarkDa
 
         return query.setParameter("user", user).setParameter("book", book).getResultList();
     }
+
+    private static final String SELECT_BOOKMARK = "select b from Bookmark b where b.user =:user ";
+
+    @Override
+    public List<Bookmark> getMarkByUser(User user, boolean isDeleted) {
+
+        TypedQuery<Bookmark> query = getSessionFactory().getCurrentSession().createQuery(SELECT_BOOKMARK + (isDeleted ? "" : "and b.dateDelete is null"), Bookmark.class);
+
+        return query.setParameter("user", user).getResultList();
+    }
 }

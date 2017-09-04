@@ -3,6 +3,7 @@ package com.perfect.booklist.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * ISBN
@@ -19,6 +20,9 @@ public class Book extends IdEntity{
     private Integer year;
     @Column(name = "file_id")
     private String fileId;
+
+    @Transient
+    private boolean favorite = false;
 
     public String getName() {
         return name;
@@ -51,4 +55,14 @@ public class Book extends IdEntity{
     public void setFileId(String fileId) {
         this.fileId = fileId;
     }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
+
 }

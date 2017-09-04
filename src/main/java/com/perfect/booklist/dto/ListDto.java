@@ -1,7 +1,6 @@
 package com.perfect.booklist.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.perfect.booklist.entity.Book;
 
 import java.util.List;
 
@@ -12,22 +11,22 @@ import static com.perfect.booklist.constant.MessageOk.SUCCESS;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BookListDto extends ResponseDto {
+public class ListDto <T> extends ResponseDto {
 
-    private List<Book> list;
+    private List<T> list;
 
 
-    public List<Book> getList() {
+    public List<T> getList() {
         return list;
     }
 
-    public void setList(List<Book> list) {
+    public void setList(List<T> list) {
         this.list = list;
     }
 
-    public BookListDto(){}
+    public ListDto(){}
 
-    public BookListDto(List<Book> list){
+    public ListDto(List<T> list){
         super(false, SUCCESS);
         this.list = list;
     }

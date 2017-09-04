@@ -1,14 +1,14 @@
 /**
- * Created by Zloy on 03.09.2017.
+ * Created by Zloy on 04.09.2017.
  */
-Ext.define('BookList.store.BookStore', {
+Ext.define('BookList.store.BookMarkStore', {
     extend: 'Ext.data.Store',
 
-    alias: 'store.BookStore',
+    alias: 'store.BookMarkStore',
 
     autoLoad: true,
     autoSync: true,
-    model: 'BookList.model.BookModel',
+    model: 'BookList.model.BookMarkModel',
 
     proxy: {
         type: 'memory',
