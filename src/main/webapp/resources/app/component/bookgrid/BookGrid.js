@@ -28,7 +28,7 @@ Ext.define("BookList.component.bookgrid.BookGrid", {
                 var record = self.getStore().getAt(rowIndex);
 
                 Ext.Ajax.request({
-                    url: '/authorize/favorite',
+                    url: 'authorize/favorite',
                     method: 'POST',
                     record: record,
                     params: {id: record.get('id'), favorite: record.get('favorite')},
@@ -76,7 +76,7 @@ Ext.define("BookList.component.bookgrid.BookGrid", {
         this.callParent(arguments);
 
         Ext.Ajax.request({
-            url: '/authorize/books',
+            url: 'authorize/books',
             method: 'GET',
             storeImp: self.getStore(),
             success: function (response, opt) {

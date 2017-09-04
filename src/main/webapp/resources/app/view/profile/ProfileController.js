@@ -8,7 +8,7 @@ Ext.define('BookList.view.profile.ProfileController', {
 
     onAfterRender : function( _self, eOpts){
         Ext.Ajax.request({
-            url: '/authorize/user',
+            url: 'authorize/user',
             method: 'GET',
             panel: this,
             success: function (response, opt) {

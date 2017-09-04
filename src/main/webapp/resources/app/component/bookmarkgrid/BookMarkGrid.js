@@ -61,7 +61,7 @@ Ext.define("BookList.component.bookmarkgrid.BookMarkGrid", {
         this.callParent(arguments);
 
         Ext.Ajax.request({
-            url: '/authorize/bookmarks',
+            url: 'authorize/bookmarks',
             method: 'GET',
             storeImp: self.getStore(),
             success: function (response, opt) {
