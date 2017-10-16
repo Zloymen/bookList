@@ -28,4 +28,9 @@ public class BookMarkDto {
     public void setId(UUID id) {
         this.id = id;
     }
+
+    public BookMarkDto(Boolean favorite, UUID id) {
+        this.favorite = favorite;
+        this.id = id;
+    }
 }

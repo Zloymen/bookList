@@ -23,9 +23,6 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private IUserDao userDao;
 
-
-
-
     public void createUser(UserDto userDto){
         User user = userDao.getByLogin(userDto.getLogin());
         if(user != null) throw new AppException(MessageError.USER_EXISTS);

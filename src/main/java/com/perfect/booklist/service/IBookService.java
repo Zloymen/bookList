@@ -13,5 +13,5 @@ public interface IBookService {
     List<Book> getAllBook();
     void saveBookMark(BookMarkDto dto);
     List<Bookmark> getUserBookMark();
-
+    List<Bookmark> testTransaction(Long id);
 }

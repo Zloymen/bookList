@@ -1,5 +1,6 @@
 package com.perfect.booklist.service.impl;
 
+import com.perfect.booklist.constant.MessageError;
 import com.perfect.booklist.dao.IBookDao;
 import com.perfect.booklist.dao.IBookmarkDao;
 import com.perfect.booklist.dto.BookMarkDto;
@@ -50,6 +51,18 @@ public class BookServiceImp implements IBookService {
     public List<Bookmark> getUserBookMark() {
         User currentUser = userService.getCurrentUser();
         return bookmarkDao.getMarkByUser(currentUser, true);
+    }
+
+    @Override
+    public List<Bookmark> testTransaction(Long recourceError) {
+
+        saveBookMark(new BookMarkDto(true,UUID.fromString("d164ebb4-78fa-43ed-b2ec-061e8b634ef7")));
+
+        if(recourceError == 0) throw new AppException(MessageError.BOOKMARK_EXISTS);
+
+        saveBookMark(new BookMarkDto(true,UUID.fromString("3bc98d43-a00a-4e8c-a910-812c4418fa12")));
+
+        return getUserBookMark();
     }
 
     public void saveBookMark(BookMarkDto dto){

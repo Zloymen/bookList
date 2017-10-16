@@ -12,10 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Zloy on 27.08.2017.
@@ -88,6 +85,17 @@ public class AuthorizeController {
     public ResponseDto getCurrentUser() {
         try{
             return new ObjectDto<User>(userService.getCurrentUser());
+        }catch(Exception e){
+            LOGGER.error("error getCurrentUser", e);
+            return new ErrorDto( MessageError.STANDART_ERROR_MESSAGE);
+        }
+    }
+
+    @RequestMapping(value = "/testTransaction", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseDto testTransaction(@RequestParam("param") Long param) {
+        try{
+            return new ListDto<>(bookService.testTransaction(param));
         }catch(Exception e){
             LOGGER.error("error getCurrentUser", e);
             return new ErrorDto( MessageError.STANDART_ERROR_MESSAGE);
