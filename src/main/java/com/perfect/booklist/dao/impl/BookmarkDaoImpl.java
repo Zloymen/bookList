@@ -20,7 +20,7 @@ public class BookmarkDaoImpl extends BaseDaoImp<Bookmark> implements IBookmarkDa
     }
 
     public List<Bookmark> getMark(Book book, User user){
-        TypedQuery<Bookmark> query = getSessionFactory().getCurrentSession().createQuery("select b from Bookmark b where b.user =:user and b.book = :book", Bookmark.class);
+        TypedQuery<Bookmark> query = getEm().createQuery("select b from Bookmark b where b.user =:user and b.book = :book", Bookmark.class);
 
         return query.setParameter("user", user).setParameter("book", book).getResultList();
     }
@@ -30,7 +30,7 @@ public class BookmarkDaoImpl extends BaseDaoImp<Bookmark> implements IBookmarkDa
     @Override
     public List<Bookmark> getMarkByUser(User user, boolean isDeleted) {
 
-        TypedQuery<Bookmark> query = getSessionFactory().getCurrentSession().createQuery(SELECT_BOOKMARK + (isDeleted ? "" : "and b.dateDelete is null"), Bookmark.class);
+        TypedQuery<Bookmark> query = getEm().createQuery(SELECT_BOOKMARK + (isDeleted ? "" : "and b.dateDelete is null"), Bookmark.class);
 
         return query.setParameter("user", user).getResultList();
     }

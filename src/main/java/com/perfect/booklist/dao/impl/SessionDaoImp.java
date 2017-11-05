@@ -23,7 +23,7 @@ public class SessionDaoImp extends BaseDaoImp<Session> implements ISessionDao {
     }
 
     public void deleteByUser(User user){
-        TypedQuery<Session> query = getSessionFactory().getCurrentSession().createQuery("select s from Session s where s.user = :user", Session.class);
+        TypedQuery<Session> query = getEm().createQuery("select s from Session s where s.user = :user", Session.class);
         query.setParameter("user", user);
         List<Session> sessions = query.getResultList();
         for(Session ss: sessions){

@@ -79,7 +79,6 @@ public class BookServiceImp implements IBookService {
             bookmark = new Bookmark();
             bookmark.setBook(book);
             bookmark.setUser(currentUser);
-            bookmark.setDateCreate(System.currentTimeMillis());
             bookmark.setId(UUID.randomUUID());
         }else{
             if(!optional.isPresent()) throw new AppException(BOOKMARK_NOT_FOUNT);

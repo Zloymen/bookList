@@ -55,4 +55,9 @@ public class Bookmark extends IdEntity {
     public void setDateDelete(Long dateDelete) {
         this.dateDelete = dateDelete;
     }
+
+    @PrePersist
+    public void prePersist(){
+        dateCreate = System.currentTimeMillis();
+    }
 }

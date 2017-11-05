@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+                                http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<persistence-unit name="persistenceItem" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<shared-cache-mode>NONE</shared-cache-mode>
+
+		<properties>
+
+			<!-- connection.isolation=2 === READ_COMMITTED -->
+			<property name="hibernate.connection.isolation" value="2"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
+
+			<property name="connection.connection.CharSet" value="utf8"/>
+			<property name="connection.connection.characterEncoding" value="utf8"/>
+			<property name="connection.connection.useUnicode" value="true"/>
+
+			<property name="hibernate.bytecode.use_reflection_optimizer" value="false"/>
+			<property name="bytecode.use_reflection_optimizer" value="false"/>
+			<property name="hibernate.current_session_context_class" value="thread"/>
+			<property name="current_session_context_class" value="thread"/>
+
+			<property name="cache.use_query_cache" value="false"/>
+			<property name="cache.use_second_level_cache" value="false"/>
+			<property name="hibernate.cache.use_second_level_cache" value="false"/>
+			<property name="cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+
+			<!--<property name="connection.autocommit" value="false" />-->
+			<!--<property name="hibernate.connection.autocommit" value="false" />-->
+
+			<!--<property name="hibernate.generate_statistics" value="false" />-->
+			<!--<property name="transaction.auto_close_session" value="true"/>-->
+			<!--<property name="hibernate.transaction.auto_close_session" value="true"/>-->
+
+			<property name="cache.use_structured_entries" value="false"/>
+			<property name="hibernate.cache.use_structured_entries" value="false"/>
+
+			<!--<property name="hibernate.archive.autodetection" value="class" />-->
+
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="show_sql" value="false"/>
+
+			<!--<property name="hibernate.flushMode" value="ALWAYS"/>-->
+			<!--<property name="flushMode" value="ALWAYS"/>-->
+
+			<!--<property name="spring.jpa.generate-ddl" value="create-drop"/>-->
+			<!--<property name="spring.jpa.hibernate.generate-ddl" value="create-drop"/>-->
+			<!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
+			<!--<property name="hibernate.hbm2ddl.auto" value="create-drop"/>-->
+			<!--<property name="hibernate.hbm2ddl.import_files" value="schema.sql"/>-->
+
+		</properties>
+	</persistence-unit>
+
+</persistence>

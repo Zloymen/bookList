@@ -33,4 +33,6 @@ public class BookMarkDto {
         this.favorite = favorite;
         this.id = id;
     }
+
+    public BookMarkDto(){}
 }

@@ -7,8 +7,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -26,21 +29,21 @@ public class BookListDBConfig{
     @Autowired
     private Environment env;
 
-    @Bean
+/*    @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan("com.perfect.booklist.entity");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
-    }
+    }*/
 
-    @Bean
+/*    @Bean
     public HibernateTransactionManager transactionManager() {
         HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(sessionFactory().getObject());
         return txManager;
-    }
+    }*/
 
     private DataSource dataSource() {
         final HikariDataSource ds = new HikariDataSource();
@@ -61,6 +64,39 @@ public class BookListDBConfig{
         properties.put(AvailableSettings.HBM2DDL_AUTO, env.getRequiredProperty("hibernate.hbm2ddl.auto"));
         properties.put(AvailableSettings.CURRENT_SESSION_CONTEXT_CLASS, env.getRequiredProperty("hibernate.current.session.context.class"));
         return properties;
+    }
+
+    private HibernateJpaVendorAdapter jpaVendorAdapter(){
+        HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+        jpaVendorAdapter.setDatabase(Database.POSTGRESQL);
+        jpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.PostgreSQL95Dialect");
+        jpaVendorAdapter.setGenerateDdl(false);
+        jpaVendorAdapter.setShowSql(true);
+        return jpaVendorAdapter;
+    }
+
+    private HibernateJpaDialect jpaDialect(){
+        HibernateJpaDialect jpaDialect = new HibernateJpaDialect();
+        jpaDialect.setPrepareConnection(true);
+        return jpaDialect;
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean geEntityManagerFactoryBean() {
+        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+        factoryBean.setDataSource(dataSource());
+        factoryBean.setPackagesToScan("com.perfect.booklist.entity");
+        factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
+        factoryBean.setJpaDialect(jpaDialect());
+        factoryBean.setPersistenceUnitName("persistenceItem");
+        return factoryBean;
+    }
+
+    @Bean
+    public JpaTransactionManager geJpaTransactionManager() {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(geEntityManagerFactoryBean().getObject());
+        return transactionManager;
     }
 
 }

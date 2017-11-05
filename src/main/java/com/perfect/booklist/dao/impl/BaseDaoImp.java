@@ -1,10 +1,10 @@
 package com.perfect.booklist.dao.impl;
 
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -16,8 +16,11 @@ import java.util.List;
 @Repository
 public abstract class BaseDaoImp <T> {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    /*@Autowired
+    private SessionFactory sessionFactory;*/
+
+    @PersistenceContext
+    private EntityManager em;
 
     private Class<T> entityClass;
 
@@ -41,11 +44,11 @@ public abstract class BaseDaoImp <T> {
 
 
     public T merge(final T entity) {
-        return (T) sessionFactory.getCurrentSession().merge(entity);
+        return (T) em.merge(entity);
     }
 
     public void delete(final T entity) {
-        sessionFactory.getCurrentSession().delete(entity);
+        em.remove(entity);
     }
 
     public void delete(Serializable id) {
@@ -54,19 +57,23 @@ public abstract class BaseDaoImp <T> {
     }
 
     public List<T> fetchAll() {
-        return sessionFactory.getCurrentSession().createQuery(" FROM "+ entityClass.getName()).list();
+        return em.createQuery(" FROM "+ entityClass.getName(), entityClass).getResultList();
     }
 
     public List<T> fetchAll(String query) {
-        return sessionFactory.getCurrentSession().createNativeQuery(query).list();
+        return em.createNativeQuery(query, entityClass).getResultList();
     }
 
     public T fetchById(Serializable id) {
-        return sessionFactory.getCurrentSession().get(entityClass, id);
+        return em.find(entityClass, id);
     }
 
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
+    public EntityManager getEm() {
+        return em;
     }
+
+    /*public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }*/
 }
 
