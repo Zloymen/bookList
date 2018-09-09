@@ -25,7 +25,7 @@ import static com.perfect.booklist.constant.MessageError.*;
  * Created by Zloy on 26.08.2017.
  */
 @Service
-@Transactional
+
 public class BookServiceImp implements IBookService {
 
     @Autowired
@@ -47,12 +47,13 @@ public class BookServiceImp implements IBookService {
         return listBook;
     }
 
+    //@Transactional
     @Override
     public List<Bookmark> getUserBookMark() {
         User currentUser = userService.getCurrentUser();
         return bookmarkDao.getMarkByUser(currentUser, true);
     }
-
+    //@Transactional
     @Override
     public List<Bookmark> testTransaction(Long recourceError) {
 
@@ -64,7 +65,7 @@ public class BookServiceImp implements IBookService {
 
         return getUserBookMark();
     }
-
+    @Transactional
     public void saveBookMark(BookMarkDto dto){
         Bookmark bookmark = null;
         User currentUser = userService.getCurrentUser();

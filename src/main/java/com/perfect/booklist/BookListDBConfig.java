@@ -12,6 +12,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -45,7 +46,7 @@ public class BookListDBConfig{
         return txManager;
     }*/
 
-    private DataSource dataSource() {
+    public DataSource dataSource() {
         final HikariDataSource ds = new HikariDataSource();
 
         ds.setMaximumPoolSize(env.getRequiredProperty("datasource.pool_size", Integer.class));
@@ -82,20 +83,21 @@ public class BookListDBConfig{
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean geEntityManagerFactoryBean() {
+    public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
         factoryBean.setPackagesToScan("com.perfect.booklist.entity");
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         factoryBean.setJpaDialect(jpaDialect());
-        factoryBean.setPersistenceUnitName("persistenceItem");
+        factoryBean.setJpaProperties(hibernateProperties());
+        //factoryBean.setPersistenceUnitName("persistenceItem");
         return factoryBean;
     }
 
     @Bean
-    public JpaTransactionManager geJpaTransactionManager() {
+    public PlatformTransactionManager geJpaTransactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(geEntityManagerFactoryBean().getObject());
+        transactionManager.setEntityManagerFactory(getEntityManagerFactoryBean().getObject());
         return transactionManager;
     }
 

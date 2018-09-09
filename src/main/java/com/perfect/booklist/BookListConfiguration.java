@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = "com.perfect.booklist")
 @PropertySource(value = { "classpath:application.properties" })
 @Import(SecurityConfig.class)
-public class BookListConfiguration extends WebMvcConfigurerAdapter {
+public class BookListConfiguration implements WebMvcConfigurer {
 
     @Autowired
     private Environment env;
