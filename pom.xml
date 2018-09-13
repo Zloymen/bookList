@@ -74,8 +74,12 @@
           <version>2.9.6</version>
       </dependency>
 
-
-
+      <!-- https://mvnrepository.com/artifact/p6spy/p6spy -->
+      <dependency>
+          <groupId>p6spy</groupId>
+          <artifactId>p6spy</artifactId>
+          <version>3.7.0</version>
+      </dependency>
 
       <dependency>
           <groupId>org.springframework</groupId>
@@ -137,7 +141,7 @@
       <dependency>
           <groupId>javax.validation</groupId>
           <artifactId>validation-api</artifactId>
-          <version>1.1.0.Final</version>
+          <version>2.0.1.Final</version>
       </dependency>
 
       <!-- Logging -->
@@ -191,6 +195,14 @@
           <artifactId>hibernate-hikaricp</artifactId>
           <version>${org.hibernate.version}</version>
       </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+      <dependency>
+          <groupId>org.hibernate.validator</groupId>
+          <artifactId>hibernate-validator</artifactId>
+          <version>6.0.12.Final</version>
+      </dependency>
+
 
       <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
       <dependency>
